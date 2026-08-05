@@ -1,8 +1,6 @@
 import sys
-
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
-    
 print("Приветствую, я Ваш персональный фитнес-бот FitLife!")
 print("=" * 62)
 user_name = input("Пожалуйста, введите Ваше имя: ")
