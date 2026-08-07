@@ -1,7 +1,3 @@
-import sys
-
-if hasattr(sys.stdout, "reconfigure"):
-    sys.stdout.reconfigure(encoding="utf-8")
 print("Приветствую, я Ваш персональный фитнес-бот FitLife!")
 print("=" * 62)
 user_name = input("Пожалуйста, введите Ваше имя: ")
@@ -13,14 +9,24 @@ while True:  # зациклил, чтобы пользователь испол�
         break
     except ValueError:
         print("""Пожалуйста, введите возраст, используя только цифры.
-        Возраст должен быть целым числом.""")
+Возраст должен быть целым числом.""")
+
+age_name = ""
+if user_age % 100 in [11, 12, 13, 14]:
+    age_name = "лет"
+elif user_age % 10 == 1:
+    age_name = "год"
+elif user_age % 10 in [2, 3, 4]:
+    age_name = "года"
+else:
+    age_name = "лет"
 
 while True:  # зациклил, по тому же принипу, что и с возрастом.
     try:
         user_weight = float(input("Введите Ваш вес в килограммах: "))
         break
     except ValueError:
-        print("""Пожалуйста, введите вес, используя только цифры" \
+        print("""Пожалуйста, введите вес, используя только цифры"
         " и знак точки как десятичный разделитель.""")
 
 while True:
@@ -30,19 +36,15 @@ while True:
     except ValueError:
         print("Пожалуйста, введите рост, используя только цифры.")
 
-bmi = user_weight / (user_height ** 2)
-
-user_bmi = round(bmi, 1)
+user_bmi = round(user_weight / (user_height ** 2), 1)
 
 WATER_PER_KG_ADULT = 30
 ML_PER_LITER = 1000
 
-water_ml = user_weight * WATER_PER_KG_ADULT
-
-water_l = round(water_ml / ML_PER_LITER, 2)
+water_l = round(user_weight * WATER_PER_KG_ADULT / ML_PER_LITER, 2)
 
 print("=" * 62)
-print(f"""Отчет для пользователя: {user_name},{user_age} лет:
+print(f"""Отчет для пользователя: {user_name}, {user_age} {age_name}:
 Ваш индекс массы тела (BMI) составляет: {user_bmi} кг/м².
 Рекомендуемая норма воды в сутки: {water_l} литра.""")
 print("=" * 62)
